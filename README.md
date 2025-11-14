@@ -60,7 +60,7 @@ O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
     * 2 Camadas Ocultas (16 e 8 neurônios) com ativação **ReLU**.
     * Regularização **Dropout** (0.25) e **L2** para prevenir *overfitting*.
     * Camada de Saída (1 neurônio) com ativação **Sigmoid** para a probabilidade binária.
-5.  **Treinamento:** O modelo foi compilado com *loss* `binary_crossentropy` e otimizador `rmsprop`, e treinado com *Early Stopping*.
+5.  **Treinamento:** O modelo foi compilado com *loss* `binary_crossentropy` e otimizador `adam`, e treinado com *Early Stopping*.
 6.  **Avaliação:** O desempenho do modelo foi medido no conjunto de teste.
 
 ---
