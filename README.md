@@ -95,7 +95,7 @@ A avaliação do modelo no conjunto de teste (**61 amostras**) revelou um desemp
 Os gráficos abaixo ilustram a eficácia do *Early Stopping*. Note que, embora o treino tenha continuado até a **Época 31** (quando a paciência de 11 épocas se esgotou), a perda de validação (`val_loss`, laranja) claramente atingiu seu ponto mínimo na **Época 20** e começou a subir, indicando overfitting. Graças ao `restore_best_weights=True`, as métricas de avaliação a seguir **referem-se ao modelo ótimo da Época 20**, e não ao modelo degradado da Época 31.
 
 <img width="1616" height="496" alt="image" src="https://github.com/user-attachments/assets/9ad21f30-feb0-4de8-a0e8-764bf28d8ffc" />
-> Obs: Os pesos considerados para o modelo final foram os da melhor época, que nesse caso foi a **20** e indicada no gráfico como **índice 19**.
+> Obs: Os pesos considerados para o modelo final foram os da melhor época, que nesse caso foi a 20 e indicada no gráfico como índice 19.
 
 ---
 
