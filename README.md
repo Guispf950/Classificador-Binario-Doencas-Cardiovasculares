@@ -36,6 +36,7 @@ As doenças cardiovasculares são a principal causa de morte em todo o mundo, to
 O modelo foi treinado e avaliado utilizando o dataset **Heart Disease UCI**, obtido via Kaggle. Após um rigoroso processo de limpeza, que incluiu a remoção de **723 registros duplicados**, o dataset final consistiu em **302 amostras únicas**.
 
 * **Features (X):** 13 atributos clínicos, como idade, sexo, nível de colesterol (`chol`), tipo de dor no peito (`cp`) e pressão arterial (`trestbps`).
+
 * **Target (y):** A variável-alvo (`target`), onde 0 indica ausência de doença e 1 indica a presença.
 
 ---
@@ -46,17 +47,16 @@ Este notebook foi desenvolvido com base nas instruções da disciplina (Tema1-Tr
 
 Foram realizadas as seguintes modificações e melhorias técnicas em relação ao código base:
 
-1. **Foco em Classificação Binária:** O notebook original explorava tanto a classificação categórica (múltiplos níveis de doença) quanto a binária. Conforme as instruções do trabalho, este projeto foi focado estritamente na **classificação binária** (0 vs 1), tratando qualquer diagnóstico de doença como classe "1".
+* **Foco em Classificação Binária:** O notebook original explorava tanto a classificação categórica (múltiplos níveis de doença) quanto a binária. Conforme as instruções do trabalho, este projeto foi focado estritamente na **classificação binária** (0 vs 1), tratando qualquer diagnóstico de doença como classe "1".
 
-2.  **Remoção de Duplicatas:** Foi identificada e executada a remoção de **723 linhas duplicadas** (o dataset original do Kaggle tinha 1025 linhas), uma etapa de pré-processamento crucial que não estava no notebook original, garantindo a integridade e a validade estatística do modelo (302 amostras restantes).
+* **Remoção de Duplicatas:** Foi identificada e executada a remoção de **723 linhas duplicadas** (o dataset original do Kaggle tinha 1025 linhas), uma etapa de pré-processamento crucial que não estava no notebook original, garantindo a integridade e a validade estatística do modelo (302 amostras restantes).
 
-3.  **Implementação de *Early Stopping*:** Para combater o *overfitting* e otimizar o tempo de treinamento, foi adicionado um *callback* `EarlyStopping` do Keras.
-
-    3.1 O modelo foi configurado para rodar por até **60 épocas**, monitorando a `val_loss`.
+* **Implementação de *Early Stopping*:** Para combater o *overfitting* e otimizar o tempo de treinamento, foi adicionado um *callback* `EarlyStopping` do Keras.
+    * O modelo foi configurado para rodar por até **60 épocas**, monitorando a `val_loss`.
     
-    3.2 O treinamento foi interrompido automaticamente na **Época 31**, pois a `val_loss` não melhorou por **11 épocas** (paciência).
+    * O treinamento foi interrompido automaticamente na **Época 31**, pois a `val_loss` não melhorou por **11 épocas** (paciência).
     
-    3.3 Crucialmente, a opção `restore_best_weights=True` foi ativada. Isso garante que o modelo final utilizado para avaliação **não é o da última época (Época 31)**, que já apresentava overfitting, mas sim o modelo com os **pesos da Época 20**, que teve o menor `val_loss` (melhor generalização).
+    * Crucialmente, a opção `restore_best_weights=True` foi ativada. Isso garante que o modelo final utilizado para avaliação **não é o da última época (Época 31)**, que já apresentava overfitting, mas sim o modelo com os **pesos da Época 20**, que teve o menor `val_loss` (melhor generalização).
 
 ---
 
@@ -64,28 +64,27 @@ Foram realizadas as seguintes modificações e melhorias técnicas em relação 
 
 O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
 
-1.  **Carga e Limpeza:** Os dados são carregados via API do Kaggle e limpos (remoção de 723 duplicatas).
+1.  **Carga e Limpeza:** Os dados são carregados via API do Kaggle e limpos (remoção de 723 duplicatas).
 
-2.  **Análise Exploratória (EDA):** Verificação de tipos de dados, balanceamento de classe (**54,3%** vs **45,7%**, bem balanceado) e análise de correlação.
+2.  **Análise Exploratória (EDA):** Verificação de tipos de dados, balanceamento de classe (**54,3%** vs **45,7%**, bem balanceado) e análise de correlação.
 
-3.  **Pré-processamento:**
+3.  **Pré-processamento:**
+    * Divisão dos dados em treino (80% / **241 amostras**) e teste (20% / **61 amostras**).
+    
+    * **Normalização (Padronização):** Aplicação do `StandardScaler` *após* a divisão (fit no treino, transform no teste) para evitar *data leakage*. Este passo é essencial devido às diferentes escalas das *features* (ex: `age` vs `chol`).
+    
+4.  **Construção do Modelo (Keras):** A ANN foi construída com:
+    * Camada de Entrada (13 neurônios)
+    
+    * 2 Camadas Ocultas (16 e 8 neurônios) com ativação **ReLU**.
+    
+    * Regularização **Dropout** (0.25) e **L2** para prevenir *overfitting*.
+    
+    * Camada de Saída (1 neurônio) com ativação **Sigmoid** para a probabilidade binária.
+    
+5.  **Treinamento:** O modelo foi compilado com *loss* `binary_crossentropy` e otimizador `adam`, e treinado com *Early Stopping* (garantindo o uso dos melhores pesos).
 
-     3.1 Divisão dos dados em treino (80% / **241 amostras**) e teste (20% / **61 amostras**).
-     
-     3.2 **Normalização (Padronização):** Aplicação do `StandardScaler` *após* a divisão (fit no treino, transform no teste) para evitar *data leakage*. Este passo é essencial devido às diferentes escalas das *features* (ex: `age` vs `chol`).
-    
-4.  **Construção do Modelo (Keras):** A ANN foi construída com:
-    4.1 Camada de Entrada (13 neurônios)
-    
-    4.2 2 Camadas Ocultas (16 e 8 neurônios) com ativação **ReLU**.
-    
-    4.3 Regularização **Dropout** (0.25) e **L2** para prevenir *overfitting*.
-    
-    4.4 Camada de Saída (1 neurônio) com ativação **Sigmoid** para a probabilidade binária.
-    
-5.  **Treinamento:** O modelo foi compilado com *loss* `binary_crossentropy` e otimizador `adam`, e treinado com *Early Stopping* (garantindo o uso dos melhores pesos).
-
-6.  **Avaliação:** O desempenho do **modelo final (com os pesos restaurados da melhor época)** foi medido no conjunto de teste.
+6.  **Avaliação:** O desempenho do **modelo final (com os pesos restaurados da melhor época)** foi medido no conjunto de teste.
 
 ---
 
@@ -96,7 +95,7 @@ A avaliação do modelo no conjunto de teste (**61 amostras**) revelou um desemp
 Os gráficos abaixo ilustram a eficácia do *Early Stopping*. Note que, embora o treino tenha continuado até a **Época 31** (quando a paciência de 11 épocas se esgotou), a perda de validação (`val_loss`, laranja) claramente atingiu seu ponto mínimo na **Época 20** e começou a subir, indicando overfitting. Graças ao `restore_best_weights=True`, as métricas de avaliação a seguir **referem-se ao modelo ótimo da Época 20**, e não ao modelo degradado da Época 31.
 
 <img width="1616" height="496" alt="image" src="https://github.com/user-attachments/assets/9ad21f30-feb0-4de8-a0e8-764bf28d8ffc" />
-> Obs: Os pesos considerados para o modelo final foram os da melhor época, que nesse caso foi a 20 e indicada no gráfico como índice 19.
+> Obs: Os pesos considerados para o modelo final foram os da melhor época, que nesse caso foi a **20** e indicada no gráfico como **índice 19**.
 
 ---
 
@@ -116,10 +115,13 @@ A matriz de confusão detalha os acertos e erros:
 
 * **Verdadeiros Positivos (TP): 28**
     * O modelo acertou 28 pacientes que tinham doença.
+
 * **Verdadeiros Negativos (TN): 23**
     * O modelo acertou 23 pacientes que *não* tinham doença.
+
 * **Falsos Negativos (FN): 5**
     * O modelo **errou 5 pacientes** que tinham doença, mas foram classificados como saudáveis.
+
 * **Falsos Positivos (FP): 5**
     * O modelo errou 5 pacientes que eram saudáveis, mas foram classificados como doentes.
 
