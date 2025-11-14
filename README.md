@@ -77,7 +77,7 @@ O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
 
 A avaliação do modelo no conjunto de teste (**61 amostras**) revelou um desempenho robusto e, o mais importante, clinicamente relevante:
 
-<img width="1616" height="496" alt="image" src="https://github.com/user-attachments/assets/9ad21f30-feb0-4de8-a0e8-764bf28d8ffc" />
+<img width="1556" height="473" alt="image" src="https://github.com/user-attachments/assets/cb20928a-1c9e-4358-9d7a-8f66a01f061e" />
 
 ### Métricas de Performance
 
