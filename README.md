@@ -74,8 +74,8 @@ A avaliação do modelo no conjunto de teste (**61 amostras**) revelou um desemp
 | Métrica | Resultado (Teste) | Interpretação |
 | :--- | :--- | :--- |
 | **Acurácia** | **83.61%** | O modelo acertou a classificação de 52 dos 61 pacientes. |
-| **Precisão (Classe 1)** | **84.85%** | Das vezes que o modelo previu "Com Doença", ele acertou 83% das vezes. |
-| **Recall (Classe 1)** | **84.85%** | O modelo identificou corretamente 91% de todos os pacientes que **realmente** tinham a doença. |
+| **Precisão (Classe 1)** | **84.85%** | Das vezes que o modelo previu "Com Doença", ele acertou 84.85% das vezes. |
+| **Recall (Classe 1)** | **84.85%** | O modelo identificou corretamente 84.85% de todos os pacientes que **realmente** tinham a doença. |
 
 ### Matriz de Confusão
 
