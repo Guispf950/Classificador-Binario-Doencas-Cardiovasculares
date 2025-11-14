@@ -52,11 +52,11 @@ Foram realizadas as seguintes modificações e melhorias técnicas em relação 
 
 3.  **Implementação de *Early Stopping*:** Para combater o *overfitting* e otimizar o tempo de treinamento, foi adicionado um *callback* `EarlyStopping` do Keras.
 
-    O modelo foi configurado para rodar por até **60 épocas**, monitorando a `val_loss`.
+    3.1 O modelo foi configurado para rodar por até **60 épocas**, monitorando a `val_loss`.
     
-    O treinamento foi interrompido automaticamente na **Época 31**, pois a `val_loss` não melhorou por **11 épocas** (paciência).
+    3.2 O treinamento foi interrompido automaticamente na **Época 31**, pois a `val_loss` não melhorou por **11 épocas** (paciência).
     
-    Crucialmente, a opção `restore_best_weights=True` foi ativada. Isso garante que o modelo final utilizado para avaliação **não é o da última época (Época 31)**, que já apresentava overfitting, mas sim o modelo com os **pesos da Época 20**, que teve o menor `val_loss` (melhor generalização).
+    3.3 Crucialmente, a opção `restore_best_weights=True` foi ativada. Isso garante que o modelo final utilizado para avaliação **não é o da última época (Época 31)**, que já apresentava overfitting, mas sim o modelo com os **pesos da Época 20**, que teve o menor `val_loss` (melhor generalização).
 
 ---
 
@@ -69,14 +69,16 @@ O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
 2.  **Análise Exploratória (EDA):** Verificação de tipos de dados, balanceamento de classe (**54,3%** vs **45,7%**, bem balanceado) e análise de correlação.
 
 3.  **Pré-processamento:**
-    * Divisão dos dados em treino (80% / **241 amostras**) e teste (20% / **61 amostras**).
-    * **Normalização (Padronização):** Aplicação do `StandardScaler` *após* a divisão (fit no treino, transform no teste) para evitar *data leakage*. Este passo é essencial devido às diferentes escalas das *features* (ex: `age` vs `chol`).
+
+     3.1 Divisão dos dados em treino (80% / **241 amostras**) e teste (20% / **61 amostras**).
+     
+     3.2 **Normalização (Padronização):** Aplicação do `StandardScaler` *após* a divisão (fit no treino, transform no teste) para evitar *data leakage*. Este passo é essencial devido às diferentes escalas das *features* (ex: `age` vs `chol`).
     
 4.  **Construção do Modelo (Keras):** A ANN foi construída com:
-    * Camada de Entrada (13 neurônios)
-    * 2 Camadas Ocultas (16 e 8 neurônios) com ativação **ReLU**.
-    * Regularização **Dropout** (0.25) e **L2** para prevenir *overfitting*.
-    * Camada de Saída (1 neurônio) com ativação **Sigmoid** para a probabilidade binária.
+    4.1 Camada de Entrada (13 neurônios)
+    4.2 2 Camadas Ocultas (16 e 8 neurônios) com ativação **ReLU**.
+    4.3 Regularização **Dropout** (0.25) e **L2** para prevenir *overfitting*.
+    4.4 Camada de Saída (1 neurônio) com ativação **Sigmoid** para a probabilidade binária.
     
 5.  **Treinamento:** O modelo foi compilado com *loss* `binary_crossentropy` e otimizador `adam`, e treinado com *Early Stopping* (garantindo o uso dos melhores pesos).
 
