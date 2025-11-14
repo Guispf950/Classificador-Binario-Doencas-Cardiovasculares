@@ -3,9 +3,17 @@
 **Disciplina:** Fundamentos de Inteligência Artificial (FIA)
 **Professor:** Edjard Mota
 
+## 👥 Equipe
+
+- ANDRÉ MALMSTEEN OLIVEIRA AMORIM
+- BENJAMIM ISAAC RIBEIRO LIMA
+- DIEGO GABRIEL SILVA AZEVEDO
+- GUILHERME DA SILVA PEREIRA
+- LETÍCIA ARAÚJO
+- MANFRED LIMA VEIGA
 ---
 
-## Sumário
+## 📋 Sumário
 * [1. Sobre o Projeto](#1-sobre-o-projeto)
 * [2. Adaptações e Melhorias](#2-adaptações-e-melhorias)
 * [3. Fluxo de Trabalho do Notebook](#3-fluxo-de-trabalho-do-notebook)
@@ -14,7 +22,7 @@
 
 ---
 
-## 1. Sobre o Projeto
+## 💡 1. Sobre o Projeto
 
 Este projeto consiste na implementação de uma Rede Neural Artificial (ANN) *feedforward* para atuar como um **classificador binário**. O objetivo é prever a presença (1) ou ausência (0) de doença cardíaca em um paciente com base em um conjunto de atributos clínicos.
 
@@ -31,7 +39,7 @@ O modelo foi treinado e avaliado utilizando o dataset **Heart Disease UCI**, obt
 
 ---
 
-## 2. Adaptações e Melhorias
+## 🚀 2. Adaptações e Melhorias
 
 Este notebook foi desenvolvido com base nas instruções da disciplina (Tema1-Trabalho-RedesNeurais.pdf) e adaptado do notebook base *'Heart Disease Prediction using Neural Networks'* (disponível no Kaggle).
 
@@ -46,7 +54,7 @@ Foram realizadas as seguintes modificações e melhorias técnicas em relação 
 
 ---
 
-## 3. Fluxo de Trabalho do Notebook
+## 🧩 3. Fluxo de Trabalho do Notebook
 
 O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
 
@@ -65,7 +73,7 @@ O notebook segue o fluxo padrão de um projeto de *Deep Learning*:
 
 ---
 
-## 4. Resultados Obtidos
+## 📊 4. Resultados Obtidos
 
 A avaliação do modelo no conjunto de teste (**61 amostras**) revelou um desempenho robusto e, o mais importante, clinicamente relevante:
 
@@ -92,7 +100,7 @@ A matriz de confusão detalha os acertos e erros:
 
 ---
 
-## 5. Conclusão
+## 🔭 5. Conclusão
 
 O resultado mais importante é o **Recall de 84.85%**. Em um cenário de diagnóstico médico, é muito mais grave cometer um Falso Negativo (não detectar a doença) do que um Falso Positivo.
 
