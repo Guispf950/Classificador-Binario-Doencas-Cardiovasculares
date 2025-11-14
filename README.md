@@ -96,6 +96,6 @@ A matriz de confusão detalha os acertos e erros:
 
 O resultado mais importante é o **Recall de 84.85%**. Em um cenário de diagnóstico médico, é muito mais grave cometer um Falso Negativo (não detectar a doença) do que um Falso Positivo.
 
-O modelo demonstrou ser altamente sensível, minimizando o erro mais perigoso (apenas 3 Falsos Negativos). A acurácia final de **83.61%** no conjunto de teste, combinada com a baixa diferença entre as curvas de treino e validação (graças ao *Dropout* e *Early Stopping*), indica que o modelo generaliza bem para dados novos.
+O modelo demonstrou ser altamente sensível, minimizando o erro mais perigoso (apenas 5 Falsos Negativos). A acurácia final de **83.61%** no conjunto de teste, combinada com a baixa diferença entre as curvas de treino e validação (graças ao *Dropout* e *Early Stopping*), indica que o modelo generaliza bem para dados novos.
 
 A normalização dos dados foi um passo fundamental; sem ela, as *features* com grandes magnitudes (como `chol`) teriam impedido o otimizador `rmsprop` de convergir para uma solução eficaz.
